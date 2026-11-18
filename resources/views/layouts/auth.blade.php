@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('contents')
-    <main class="max-w-2xl mt-10 mx-auto shadow-lg">
+    <main class="max-w-2xl mt-10 mx-auto shadow-lg px-6 py-6">
         <h1 class="font-bold text-4xl">@yield('title')</h1>
         @yield('auth-contents')
     </main>  

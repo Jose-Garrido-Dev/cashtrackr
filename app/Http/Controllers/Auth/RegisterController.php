@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\SignupRequest; //form request de register
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -21,7 +23,12 @@ class RegisterController extends Controller
         $data =$request->validated();
     
         //Almacene en la base de datos
-        User::create($data);
-        // return "Hola: $name, E-mail: $email";
+        $user = User::create($data);
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect()->route('verification.notice');
+        
     }
 }
